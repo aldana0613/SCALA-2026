@@ -5,38 +5,51 @@
 
 case class Libro(titulo: String, autor: String, paginas: Int)
 
-def filtrarLibrosCortos(libros: List[Libro]): List[Libro] =
-  // Creamos un iterador a partir de la lista
-  var resultado: List[Libro] = List()
-  for libro <- libros do //se recorre el iterador elemento por elemento
-    if libro.paginas < 200 then //si el libro tiene menos de 100 paginas, entonces se agrega a la lista resultado
-      resultado = resultado :+ libro
-  resultado
+object Ej1_Libros {
 
-def formatearTitulos(libros: List[Libro]): List[String] =
-  var titulos: List[String] = List()
-  for libro <- libros do
-    titulos = titulos :+ ("LECTURA CORTA: " + libro.titulo.toUpperCase)
-  titulos
+  // Funcion que filtra manualmente los libros con menos de 200 paginas
+  def filtrarLibrosCortos(libros: List[Libro]): List[Libro] = {
+    var resultado: List[Libro] = List()
+    for (libro <- libros) {
+      if (libro.paginas < 200) {
+        resultado = resultado :+ libro
+      }
+    }
+    resultado
+  }
 
-def contarCaracteres(titulos: List[String]): Int =
-  var total = 0
-  for titulo <- titulos do
-    total += titulo.length
-  total
+  // Funcion que transforma los titulos a mayusculas con el prefijo
+  def formatearTitulos(libros: List[Libro]): List[String] = {
+    var titulos: List[String] = List()
+    for (libro <- libros) {
+      titulos = titulos :+ ("LECTURA CORTA: " + libro.titulo.toUpperCase)
+    }
+    titulos
+  }
 
-@main def S3Ej1_Libros(): Unit =
-  val libros = List(
-    Libro("El Principito", "Saint-Exupery", 96),
-    Libro("Cien Anios de Soledad", "Garcia Marquez", 471),
-    Libro("La Metamorfosis", "Kafka", 90),
-    Libro("Rayuela", "Cortazar", 635)
-  )
+  // Funcion que cuenta el total de caracteres de todos los titulos combinados
+  def contarCaracteres(titulos: List[String]): Int = {
+    var total = 0
+    for (titulo <- titulos) {
+      total += titulo.length
+    }
+    total
+  }
 
-  val librosCortos = filtrarLibrosCortos(libros)
-  val titulosFormateados = formatearTitulos(librosCortos)
-  val totalCaracteres = contarCaracteres(titulosFormateados)
+  def main(args: Array[String]): Unit = {
+    val libros = List(
+      Libro("El Principito", "Saint-Exupery", 96),
+      Libro("Cien Anios de Soledad", "Garcia Marquez", 471),
+      Libro("La Metamorfosis", "Kafka", 90),
+      Libro("Rayuela", "Cortazar", 635)
+    )
 
-  println("Reporte de Lecturas Rapidas:")
-  titulosFormateados.foreach(println)
-  println(s"Total de caracteres combinados: $totalCaracteres")
+    val librosCortos = filtrarLibrosCortos(libros)
+    val titulosFormateados = formatearTitulos(librosCortos)
+    val totalCaracteres = contarCaracteres(titulosFormateados)
+
+    println("Reporte de Lecturas Rapidas:")
+    titulosFormateados.foreach(println)
+    println(s"Total de caracteres combinados: $totalCaracteres")
+  }
+}

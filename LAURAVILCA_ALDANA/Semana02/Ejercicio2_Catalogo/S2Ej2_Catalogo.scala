@@ -3,28 +3,36 @@
 //Fecha de creacion: 05/09/2026
 //Descripción: Usa un iterador sobre un Map para buscar un producto por nombre
 
-def buscarProducto(catalogo: Map[String, Double], nombreBuscado: String): Unit =
-  // Creamos un iterador a partir del Map
-  val it = catalogo.iterator // creacion de un iterador a partir del Map
-  var encontrado = false
+object Ej2_Catalogo {
 
-  while it.hasNext && !encontrado do //se recorre el iterador elemento por elemento
-    val (producto, precio) = it.next()
-    
-    if producto == nombreBuscado then //si el producto coincide con el nombre buscado, entonces se imprime y marca como encontrado
-      println(s"El precio de '$producto' es: $$$precio")
-      encontrado = true
+  def buscarProducto(catalogo: Map[String, Double], nombreBuscado: String): Unit = {
+    // Iterador sobre las entradas (clave, valor) del mapa
+    val it = catalogo.iterator
+    var encontrado = false
 
-  if !encontrado then // Cuando se termina de iterar, si no se encontró el producto, se muestra el mensaje correspondiente
-    println(s"Producto no encontrado en el catálogo actual.")
+    while (it.hasNext && !encontrado) {
+      val (producto, precio) = it.next()
+      if (producto == nombreBuscado) {
+        println(s"El precio de $producto es $$$precio")
+        encontrado = true
+      }
+    }
 
-@main def S2Ej2_Catalogo(): Unit =
-  val catalogo = Map(
-    "Laptop" -> 2500.00,
-    "Mouse" -> 35.50,
-    "Teclado" -> 80.00,
-    "Monitor" -> 650.00
-  )
+    // Si el iterador se agoto y no se encontro, mostramos el mensaje correspondiente
+    if (!encontrado) {
+      println("Producto no encontrado en el catalogo actual")
+    }
+  }
 
-  buscarProducto(catalogo, "Teclado") // Ejemplo de búsqueda de un producto que no está en el catálogo
-  buscarProducto(catalogo, "Tablet") // Ejemplo de búsqueda de un producto que sí está en el catálogo
+  def main(args: Array[String]): Unit = {
+    val catalogo = Map(
+      "Laptop" -> 2500.00,
+      "Mouse" -> 35.50,
+      "Teclado" -> 80.00,
+      "Monitor" -> 650.00
+    )
+
+    buscarProducto(catalogo, "Teclado")   // caso: si existe
+    buscarProducto(catalogo, "Impresora") // caso: no existe
+  }
+}
