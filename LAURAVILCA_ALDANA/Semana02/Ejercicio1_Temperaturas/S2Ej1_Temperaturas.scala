@@ -5,29 +5,39 @@
 
 import scala.io.StdIn.readInt
 
-def verificarTemperaturas(temperaturas: List[Int], minimo: Int, maximo: Int): Unit =
-  
-  val it = temperaturas.iterator // creacion de un iterador a partir de la lista
-  var hayAlerta = false
+object Ej1_Temperaturas {
 
-  while it.hasNext do //se recorre el iterador elemento por elemento
-    val temp = it.next()
-    
-    if temp < minimo || temp > maximo then //si la temperatura no esta en el rango seguro, entonces se imprime y marca la alerta 
-      println(s"Temperatura fuera de rango: $temp°C")
-      hayAlerta = true
+  def verificarTemperaturas(temperaturas: List[Int], minimo: Int, maximo: Int): Unit = {
+    // Creamos un iterador a partir de la lista
+    val it = temperaturas.iterator
+    var hayAlerta = false
 
-  if hayAlerta then // Cuando se termina de iterar, si hubo al menos una fuera de rango, se muestra la alerta
-    println("Alerta de estabilidad")
+    // Recorremos el iterador elemento por elemento
+    while (it.hasNext) {
+      val temp = it.next()
+      // Si la temperatura esta fuera del rango seguro, se imprime y se marca alerta
+      if (temp < minimo || temp > maximo) {
+        println(s"Temperatura fuera de rango: $temp°C")
+        hayAlerta = true
+      }
+    }
 
-@main def S2Ej1_Temperaturas(): Unit =
-  val temperaturas = List(5, 15, 22, 45, 30, 8, 41)
+    // Al terminar de iterar, si hubo al menos una fuera de rango, mostramos la alerta
+    if (hayAlerta) {
+      println("Alerta de estabilidad")
+    }
+  }
 
-  print("Ingrese la temperatura minima segura: ")
-  val minimo = readInt()
-  print("Ingrese la temperatura maxima segura: ")
-  val maximo = readInt()
+  def main(args: Array[String]): Unit = {
+    val temperaturas = List(5, 15, 22, 45, 30, 8, 41)
 
-  verificarTemperaturas(temperaturas, minimo, maximo)
+    print("Ingrese la temperatura minima segura: ")
+    val minimo = readInt()
+    print("Ingrese la temperatura maxima segura: ")
+    val maximo = readInt()
+
+    verificarTemperaturas(temperaturas, minimo, maximo)
+  }
+}
 
  
