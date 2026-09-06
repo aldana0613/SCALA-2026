@@ -1,42 +1,42 @@
 //Autor: Aldana Fátima Laura Vilca
 //Código: u23100516
-//Fecha de creacion: 05/09/2026
-//Descripción: Usa un iterador para detectar temperaturas fuera de rango seguro
+//Fecha de creacion: 05/09/2026Usa un iterador para detectar temperaturas fuera de rango seguro
+//Descripción: Usa un iterador sobre un Map para buscar un producto por nombre
 
-import scala.io.StdIn.readInt
+import scala.io.StdIn
 
-object Ej1_Temperaturas {
+object Ejercicio1 {
 
-  def verificarTemperaturas(temperaturas: List[Int], minimo: Int, maximo: Int): Unit = {
-    // Creamos un iterador a partir de la lista
+  def temperaturasFueraDeRango(temperaturas: List[Int], minimo: Int, maximo: Int): Unit = {
     val it = temperaturas.iterator
     var hayAlerta = false
 
-    // Recorremos el iterador elemento por elemento
     while (it.hasNext) {
       val temp = it.next()
-      // Si la temperatura esta fuera del rango seguro, se imprime y se marca alerta
+
       if (temp < minimo || temp > maximo) {
         println(s"Temperatura fuera de rango: $temp°C")
         hayAlerta = true
       }
+      else {
+        println(s"Temperatura dentro del rango: $temp°C")
+      }
     }
 
-    // Al terminar de iterar, si hubo al menos una fuera de rango, mostramos la alerta
     if (hayAlerta) {
       println("Alerta de estabilidad")
     }
   }
 
   def main(args: Array[String]): Unit = {
-    val temperaturas = List(5, 15, 22, 45, 30, 8, 41)
+    val temperaturas = List(5, 15, 22, 38, 42, 8, 25)
 
-    print("Ingrese la temperatura minima segura: ")
-    val minimo = readInt()
-    print("Ingrese la temperatura maxima segura: ")
-    val maximo = readInt()
+    println("Ingrese la temperatura mínima segura:")
+    val minimo = StdIn.readInt()
 
-    verificarTemperaturas(temperaturas, minimo, maximo)
+    println("Ingrese la temperatura máxima segura:")
+    val maximo = StdIn.readInt()
+
+    temperaturasFueraDeRango(temperaturas, minimo, maximo)
   }
 }
- 
